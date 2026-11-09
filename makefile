@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS=-Wall -g
 
-SOURCES=signal_handler.c signal_alarm.c
-EXECUTABLES=signal_handler signal_alarm
+SOURCES=signal_handler.c signal_alarm.c signal_segfault.c
+EXECUTABLES=signal_handler signal_alarm signal_segfault
 
 all: $(EXECUTABLES)
 
