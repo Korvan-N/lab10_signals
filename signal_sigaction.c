@@ -2,18 +2,20 @@
  * File: signal_sigaction.c
  * Modified by: korvan nameni
  * 
- * Brief summary of program: 
+ * Brief summary of program: wait until sigusr1 signal received, print sender pid
  */
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
-void handler(int sig){
-    printf("signal received. sender pid is %d\n", getpid());
+void handler(int sig, siginfo_t* info, void* context){
+    printf("signal received. sender pid is %d\n", info->si_pid);
     kill(getpid(), SIGTERM);
 }
 int main(void){
     struct sigaction sa;
-    sa.sa_handler = handler;
+    sa.sa_sigaction = handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_SIGINFO;
     sigaction(SIGUSR1, &sa, NULL);
     printf("pid is %d\nwaiting.\n", getpid());
 
