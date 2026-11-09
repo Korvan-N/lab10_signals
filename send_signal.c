@@ -7,21 +7,30 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
-void handler(int sig, siginfo_t* info, void* context){
-    printf("signal received. sival_int is %d\n", info->si_value.sival_int);
-    kill(getpid(), SIGTERM);
-}
+#include <stdlib.h>
+#include <time.h>
 int main(void){
-    struct sigaction sa;
-    sa.sa_sigaction = handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_SIGINFO;
-    sigaction(SIGUSR1, &sa, NULL);
-    printf("pid is %d\nwaiting.\n", getpid());
+    srand(time(NULL)); //randomize seed
+
+    union sigval val;
+    val.sival_int = rand(); //set sival_int
+
+    FILE* fp = popen("pidof recv_signal", "r"); //get executable pid
+    if(fp == NULL){
+        printf("null pointer.\n");
+        exit(0);
+    }
+    pid_t pid;
+    if(fscanf(fp, "%d", &pid) != 1){ //parse pid
+        printf("executable not running.\n");
+        exit(0);
+    }
 
     while(1){
+        printf("sending random int <%d> to %d...\n", val.sival_int, pid);
+        sleep(1);
+        sigqueue(pid, SIGUSR1, val); //send sigusr1 with its value
+        exit(0);
     }
-// to receive a SIGUSR1:(in a new terminal) kill -SIGUSR1 <pid>
-
 }
 

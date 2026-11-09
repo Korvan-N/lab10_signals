@@ -21,7 +21,5 @@ int main(void){
 
     while(1){
     }
-// to receive a SIGUSR1:(in a new terminal) kill -SIGUSR1 <pid>
-
 }
 
