@@ -14,9 +14,9 @@ void handler(int sig, siginfo_t* info, void* context){
 int main(void){
     struct sigaction sa;
     sa.sa_sigaction = handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_SIGINFO;
-    sigaction(SIGUSR1, &sa, NULL);
+    sigemptyset(&sa.sa_mask); //clear flags
+    sa.sa_flags = SA_SIGINFO; // 3 args in handler instead of 1
+    sigaction(SIGUSR1, &sa, NULL); //register usr1 signal
     printf("pid is %d\nwaiting.\n", getpid());
 
     while(1){

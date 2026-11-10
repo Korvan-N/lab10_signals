@@ -13,7 +13,7 @@ void handle_alarm(){
 }
 int main(void){
     alarm(5);
-    signal(SIGALRM, handle_alarm);
+    signal(SIGALRM, handle_alarm); // register alarm signal
     while(1){
         puts("sleep");
         sleep(1);

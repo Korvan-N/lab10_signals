@@ -27,7 +27,7 @@ int main(void){
     }
 
     while(1){
-        printf("sending random int <%d> to %d...\n", val.sival_int, pid);
+        printf("sending random int %d to %d...\n", val.sival_int, pid);
         sleep(1);
         sigqueue(pid, SIGUSR1, val); //send sigusr1 with its value
         exit(0);
