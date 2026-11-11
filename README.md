@@ -10,9 +10,9 @@ Program waits for an alarm signal and exits on receive. signal sent after 5 seco
 ## `SIGNAL_SEGFAULT`
 Program handles a segfault signal by printing a custom message and ending the program. Run with `./signal_segfault`
 
-`SEND_SIGNAL/RECEIVE_SIGNAL`
+## `SEND_SIGNAL/RECEIVE_SIGNAL`
 Demonstration of sending signals across active programs using PIDs. Program transmits a random integer. To run, execute `./recv_signal` in 1 terminal and execute `./send_signal` in another.
 
-`TENNIS`
+## `TENNIS`
 Application of volleying signals with values across processes.
 To run, open 2 separate terminals and run `./tennis` in them. watch the two terminals play against each other in a game.
