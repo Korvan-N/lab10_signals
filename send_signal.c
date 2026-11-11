@@ -13,7 +13,7 @@ int main(void){
     srand(time(NULL)); //randomize seed
 
     union sigval val;
-    val.sival_int = rand(); //set sival_int
+    val.sival_int = rand()%100; //set sival_int
 
     FILE* fp = popen("pidof recv_signal", "r"); //get executable pid
     if(fp == NULL){

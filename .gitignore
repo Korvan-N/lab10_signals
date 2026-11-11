@@ -4,3 +4,5 @@ signal_segfault
 signal_sigaction
 recv_signal
 send_signal
+tennis
+.vscode/
